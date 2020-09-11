@@ -1,4 +1,6 @@
+import 'package:controle_financeiro/screens/cadastro_usuario_screen.dart';
 import 'package:controle_financeiro/screens/home_screen.dart';
+import 'package:controle_financeiro/screens/recuperacao_senha_screen.dart';
 import 'package:controle_financeiro/utils/colors.dart';
 import 'package:controle_financeiro/widgets/container_button_widget.dart';
 import 'package:controle_financeiro/widgets/container_text_widget.dart';
@@ -36,13 +38,13 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 100),
+                SizedBox(height: 50),
                 MyTextContainerWidget(
                   texto: "Controle Financeiro Familiar",
                   fontWeight: FontWeight.bold,
                   tamanhoFonte: 25.0,
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 30),
                 SizedBox(
                   height: 155.0,
                   child: Image.asset(
@@ -61,6 +63,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 15.0),
                 textfieldContainerSenha,
                 MyButtonContainerWidget(
+                  colarNaWidgetDeCima: true,
+                  textAlign: TextAlign.right,
+                  inverse: true,
+                  titulo: "Esqueci minha senha",
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RecuperacaoSenhaScreen()));
+                  },
+                ),
+                MyButtonContainerWidget(
                   titulo: "Entrar",
                   onPressed: () {
                     Navigator.push(context,
@@ -70,7 +84,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 MyButtonContainerWidget(
                   inverse: true,
                   titulo: "Não tem conta? Crie uma aqui!",
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CadastroUsuarioScreen()));
+                  },
                 )
               ],
             ),

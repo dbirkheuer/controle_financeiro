@@ -25,7 +25,7 @@ class MyTextContainerWidget extends Container {
             fontSize: this.tamanhoFonte,
             color: this.corFonte,
             fontWeight: fontWeight),
-        textAlign: TextAlign.center,
+        textAlign: this.textAlign,
       ),
       margin: const EdgeInsets.only(left: 30.0, right: 30.0),
     );

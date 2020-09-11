@@ -6,7 +6,8 @@ class MyAppBarWidgets {
     return AppBar(
       elevation: 8,
       backgroundColor: MyColor.lilas,
-      title: Text("Criando seu controle Financeiro"),
+      title: Text(titulo),
+      centerTitle: true,
     );
   }
 
@@ -15,7 +16,7 @@ class MyAppBarWidgets {
       elevation: 8,
       actions: actions,
       backgroundColor: MyColor.lilas,
-      title: Text("Criando seu controle Financeiro"),
+      title: Text(titulo),
     );
   }
 }

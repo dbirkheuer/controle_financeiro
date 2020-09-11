@@ -8,11 +8,7 @@ class MyTextfieldContainerWidget extends Container {
   String hint;
   bool isCampoSenha;
 
-  MyTextfieldContainerWidget({this.hint, this.isCampoSenha});
-
-  String getText() {
-    return myController.text;
-  }
+  MyTextfieldContainerWidget({this.hint = "", this.isCampoSenha = false});
 
   @override
   Widget build(BuildContext context) {
@@ -38,5 +34,9 @@ class MyTextfieldContainerWidget extends Container {
     return Container(
         margin: const EdgeInsets.only(left: 30.0, right: 30.0),
         child: textfield);
+  }
+
+  String getText() {
+    return myController.text;
   }
 }

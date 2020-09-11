@@ -6,8 +6,10 @@ class MyButtonContainerWidget extends Container {
   String titulo;
   Function onPressed;
   bool inverse;
+  bool colarNaWidgetDeCima;
+  TextAlign textAlign;
 
-  MyButtonContainerWidget({this.titulo, this.onPressed, this.inverse = false});
+  MyButtonContainerWidget({this.titulo, this.onPressed, this.inverse = false, this.colarNaWidgetDeCima = false, this.textAlign = TextAlign.center});
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +25,12 @@ class MyButtonContainerWidget extends Container {
             onPressed.call();
           },
           child: Text(titulo,
-              textAlign: TextAlign.center,
+              textAlign: this.textAlign,
               style: MyStyle.padrao()
                   .copyWith(fontSize: this.inverse ? 16 : 18, color: this.inverse ? MyColor.lilas : Colors.white, fontWeight: FontWeight.bold)),
         ),
       ),
-      margin: const EdgeInsets.only(top: 35, left: 30.0, right: 30.0),
+      margin: this.colarNaWidgetDeCima ? null : const EdgeInsets.only(top: 35, left: 30.0, right: 30.0),
     );
   }
 }

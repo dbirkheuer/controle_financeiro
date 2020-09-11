@@ -1,5 +1,9 @@
+import 'package:controle_financeiro/negocio/alertas/Mensagem.dart';
+import 'package:controle_financeiro/negocio/firebase/firebase_auth.dart';
+import 'package:controle_financeiro/screens/home_screen.dart';
 import 'package:controle_financeiro/widgets/appbar_widgets.dart';
 import 'package:controle_financeiro/widgets/container_button_widget.dart';
+import 'package:controle_financeiro/widgets/container_text_widget.dart';
 import 'package:controle_financeiro/widgets/container_textfield_widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -9,34 +13,59 @@ class CadastroUsuarioScreen extends StatefulWidget {
 }
 
 class _CadastroUsuarioScreenState extends State<CadastroUsuarioScreen> {
+  FirebaseAuth auth = FirebaseAuth();
+
   @override
   Widget build(BuildContext context) {
-    Container containerNome = MyTextfieldContainerWidget(
+    MyTextfieldContainerWidget containerNome = MyTextfieldContainerWidget(
       hint: "Seu nome completo",
     );
 
-    Container containerEmail = MyTextfieldContainerWidget(
+    MyTextfieldContainerWidget containerEmail = MyTextfieldContainerWidget(
       hint: "Seu email",
     );
 
-    Container containerSenha = MyTextfieldContainerWidget(
+    MyTextfieldContainerWidget containerSenha = MyTextfieldContainerWidget(
       hint: "Sua senha",
       isCampoSenha: true,
     );
 
-    Container containerButtonCadastrar =
-        MyButtonContainerWidget(titulo: "Cadastrar", onPressed: () {});
+    MyButtonContainerWidget containerButtonCadastrar = MyButtonContainerWidget(
+        titulo: "Cadastrar",
+        onPressed: () {
+          auth
+              .cadastrarNovoUsuario(containerNome.getText(),
+                  containerEmail.getText(), containerSenha.getText())
+              .then((value) => () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  })
+              .catchError((error) => {Mensagem.exibirError(context, error)});
+        });
 
     return Scaffold(
-      appBar: MyAppBarWidgets.padrao("Novo cadastro"),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          containerNome,
-          containerEmail,
-          containerSenha,
-          containerButtonCadastrar
+      appBar: MyAppBarWidgets.padrao("Criando seu acesso"),
+      body: ListView(
+        padding: const EdgeInsets.all(8),
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(height: 20),
+              MyTextContainerWidget(
+                  texto:
+                      "Só vou precisar de três informações para criar seu cadastro."),
+              SizedBox(height: 20),
+              containerNome,
+              SizedBox(height: 20),
+              containerEmail,
+              SizedBox(height: 20),
+              containerSenha,
+              SizedBox(height: 20),
+              containerButtonCadastrar,
+            ],
+          ),
         ],
       ),
     );
