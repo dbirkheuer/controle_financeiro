@@ -31,7 +31,7 @@ class _CadastroUsuarioScreenState extends State<CadastroUsuarioScreen> {
     );
 
     MyButtonContainerWidget containerButtonCadastrar = MyButtonContainerWidget(
-        titulo: "Cadastrar",
+        titulo: "Continuar",
         onPressed: () {
           auth
               .cadastrarNovoUsuario(containerNome.getText(),
